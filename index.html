@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | RAG Framework for Hydrogen Generation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to the RAG Framework for Hydrogen Generation</h1>
+            <p class="intro-text">
+                This web application leverages advanced large language models to provide powerful tools for text summarization 
+                and question-answering, specifically designed for the field of hydrogen generation.
+            </p>
+        </header>
+
+        <section class="get-started">
+            <p>To get started, please choose one of the options below:</p>
+            <div class="button-container">
+                <a href="{{ url_for('summarizer') }}" class="btn-primary">Go to Text Summarizer</a>
+                <a href="{{ url_for('qa') }}" class="btn-primary">Go to QA Bot</a>
+            </div>
+        </section>
+
+        <footer>
+            <p>
+                You can find the source code for this project on GitHub:
+                <a 
+                  href="https://github.com/MK2706/RAG-for-Hydroge-Generation" 
+                  class="github-link" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  GitHub Repository
+                </a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

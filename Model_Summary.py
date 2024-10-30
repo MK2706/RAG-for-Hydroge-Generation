@@ -39,7 +39,7 @@ def summarize(input_text=None, pdf_file=None):
         **inputs,
         max_length=150,
         num_beams=4,
-        early_stopping=True  # Ensure early_stopping is set correctly
+        early_stopping=True if model.config.early_stopping is None else model.config.early_stopping  # Ensure it's a boolean
     )
 
     # Decode the generated summary and return it

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <title>Text Summarizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/summarizer.css') }}">
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Text Summarizer</h1>
+        
+        <!-- Form for text input and file upload -->
+        <form method="post" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label for="input_textarea" class="form-label">Enter or paste your text:</label>
+                <textarea 
+                    id="input_textarea" 
+                    name="input_textarea" 
+                    class="form-control" 
+                    rows="6" 
+                    placeholder="Enter or paste your text and press 'Summarize'."
+                >{{ request.form.get('input_textarea', '') }}</textarea>
+            </div>
+
+            <div class="mb-4">
+                <label for="summary" class="form-label">Summary:</label>
+                <textarea 
+                    id="summary" 
+                    class="form-control" 
+                    rows="6" 
+                    placeholder="Summary will be displayed here..." 
+                    readonly
+                >{{ result or "" }}</textarea>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="file-input">
+                    <input 
+                        type="file" 
+                        id="upload-doc" 
+                        name="upload-doc" 
+                        accept=".pdf" 
+                        class="form-control" 
+                        onchange="updateFileName(this)"
+                    />
+                    <label for="upload-doc" class="btn btn-secondary mt-2">Choose a PDF File</label>
+                    <span id="file-name" class="text-muted ms-2"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Summarize</button>
+            </div>
+        </form>
+
+        <!-- Uploaded files section -->
+        {% if uploaded_files %}
+        <div class="uploaded-files mt-4">
+            <h3>Uploaded Files:</h3>
+            <ul class="list-group">
+                {% for file in uploaded_files %}
+                <li class="list-group-item">{{ file }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function updateFileName(input) {
+            const fileName = input.files[0]?.name || "No file chosen";
+            document.getElementById("file-name").textContent = fileName;
+        }
+    </script>
+</body>
+</html>
+
+{% endblock %}

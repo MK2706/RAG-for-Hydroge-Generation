@@ -2,8 +2,8 @@ import PyPDF2
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 # Load the pre-trained model and tokenizer
-model = AutoModelForSeq2SeqLM.from_pretrained("1MK26/BART_HYDROGEN")
-tokenizer = AutoTokenizer.from_pretrained("1MK26/BART_HYDROGEN")
+model = AutoModelForSeq2SeqLM.from_pretrained("1MK26/hydro_bart_GEN")
+tokenizer = AutoTokenizer.from_pretrained("1MK26/hydro_bart_GEN")
 
 def summarize(input_text=None, pdf_file=None):
     # Check if either input_text or pdf_file is provided

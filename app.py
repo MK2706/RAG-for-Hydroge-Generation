@@ -1,13 +1,12 @@
 from flask import Flask
+from flask_ngrok import run_with_ngrok
 
-# Create a Flask application
 app = Flask(__name__)
+run_with_ngrok(app)  # Start ngrok when the app is run
 
-# Define the route for the home page
 @app.route('/')
 def home():
     return "Hello, World!"
 
-# Run the app
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

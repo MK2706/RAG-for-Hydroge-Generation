@@ -27,16 +27,9 @@ def qa_interface():
     
     if st.button("Get Answer"):
         if question:
-            try:
-                # Debugging print statement
-                print("Question received:", question)
-                # Generate the answer using the mldq function from Model_QA.py
-                answer = mldq.generate_answer(question)
-                st.write("**Answer:**", answer)
-            except Exception as e:
-                # Display error in the app if something goes wrong
-                st.error(f"An error occurred while generating the answer: {e}")
-                print(f"Error: {e}")
+            # Generate the answer using the mldq function from Model_QA.py
+            answer = mldq.generate_answer(question)
+            st.write("**Answer:**", answer)
         else:
             st.warning("Please enter a question.")
 
@@ -47,23 +40,12 @@ def summarization_interface():
 
     if st.button("Summarize"):
         if text:
-            try:
-                # Debugging print statement
-                print("Text to summarize received.")
-                # Generate the summary using the mld function from Model_Summary.py
-                summary = mld.summarize(text)
-                st.write("**Summary:**", summary)
-            except Exception as e:
-                # Display error in the app if something goes wrong
-                st.error(f"An error occurred while summarizing the text: {e}")
-                print(f"Error: {e}")
+            # Generate the summary using the mld function from Model_Summary.py
+            summary = mld.summarize(text)
+            st.write("**Summary:**", summary)
         else:
             st.warning("Please enter some text to summarize.")
 
 # Run the main function
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as e:
-        st.error(f"An error occurred in the main function: {e}")
-        print(f"Main function error: {e}")
+    main()

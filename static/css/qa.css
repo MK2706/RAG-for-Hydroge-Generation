@@ -1,66 +1,86 @@
-/* qa.css */
 body {
-    background-color: #e9ecef;
-    color: #343a40;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #2b2b2f;
 }
-.container {
-    max-width: 800px;
-    margin: 50px auto;
+
+form {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #2b2b2f;
     padding: 20px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
 }
-header {
-    text-align: center;
-    margin-bottom: 30px;
+
+input[type="radio"],
+input[type="range"] {
+    margin-right: 10px;
 }
-h1 {
-    color: #007bff;
-    font-size: 2.5em;
-}
-.chat-box {
-    border: 1px solid #ccc;
-    padding: 10px;
-    height: 300px;
-    overflow-y: auto;
-    margin-bottom: 10px;
-}
-.input-container {
+
+.textarea-container {
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
-input[type="text"] {
-    flex: 1;
+
+textarea {
+    width: 100%; /* Use full width for the answer area */
+    height: 300px; /* Keep height consistent */
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    box-sizing: border-box;
+    color: white;
+    background-color: #2b2b2f;
+    border: 1px solid #0093d0; /* Add border for clarity */
+    border-radius: 4px; /* Rounded corners */
 }
-.btn-send {
-    background-color: #28a745;
+
+button {
+    padding: 10px 20px;
+    background-color: #0093d0;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    margin-left: 10px;
+    margin-top: 10px; /* Space above button */
 }
-.btn-send:hover {
-    background-color: #218838;
+
+button:hover {
+    background-color: #003366;
 }
-footer {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 0.9em;
-    color: #6c757d;
+
+input[type="file"] {
+    display: none;
 }
-.github-link {
-    color: #007bff;
-    text-decoration: none;
+
+label[for="upload-doc"] {
+    background-color: transparent;
+    color: white;
+    padding: 5px 20px;
+    border: 2px solid #0093d0;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px; /* Space above label */
 }
-.github-link:hover {
-    text-decoration: underline;
+
+label[for="upload-doc"]:hover {
+    background-color: #003366;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.uploaded-files {
+    background-color: #2b2b2f;
+    color: white;
+    margin-top: 20px; /* Add space above uploaded files section */
+    padding: 10px; /* Padding for better spacing */
+    border-radius: 4px; /* Rounded corners for the uploaded files section */
 }

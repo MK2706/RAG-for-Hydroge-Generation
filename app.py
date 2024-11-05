@@ -1,8 +1,6 @@
 # app.py
 
 import streamlit as st
-import Model_Summary as mld
-import Model_QA as mldq
 
 # Set the main page layout
 st.set_page_config(page_title="QA and Summarization App", layout="centered")

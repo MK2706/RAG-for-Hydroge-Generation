@@ -1,45 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Q&A Bot | RAG Framework for Hydrogen Generation</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/qa.css') }}"> <!-- Link to the external CSS file -->
+    <title>Question Answering System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/qa.css') }}">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Q&A Bot for Hydrogen Generation</h1>
-            <p>Ask your questions about hydrogen generation and get instant responses!</p>
-        </header>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Question Answering System</h1>
+        
+        <!-- Form for question input and file upload -->
+        <form method="post" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label for="input_question" class="form-label">Enter your question:</label>
+                <textarea 
+                    id="input_question" 
+                    name="input_question" 
+                    class="form-control" 
+                    rows="3" 
+                    placeholder="Type your question here and press 'Get Answer.'"
+                >{{ request.form.get('input_question', '') }}</textarea>
+            </div>
 
-        <div class="chat-box" id="chat-box"></div>
+            <div class="mb-4">
+                <label for="answer" class="form-label">Answer:</label>
+                <textarea 
+                    id="answer" 
+                    class="form-control" 
+                    rows="6" 
+                    placeholder="Answer will be displayed here..." 
+                    readonly
+                >{{ result or "" }}</textarea>
+            </div>
 
-        <div class="input-container">
-            <input type="text" id="user-input" onkeypress="handleKeyPress(event)" placeholder="Type your message..." autocomplete="off">
-            <button class="btn-send" onclick="sendMessage()">Send</button>
-        </div>
-
-        <form id="upload-form" onsubmit="uploadPDF(); return false;">
-            <input type="file" name="file" required>
-            <button type="submit">Upload PDF</button>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="file-input">
+                    <input 
+                        type="file" 
+                        id="upload-doc" 
+                        name="upload-doc" 
+                        accept=".pdf" 
+                        class="form-control" 
+                        onchange="updateFileName(this)"
+                    />
+                    <label for="upload-doc" class="btn btn-secondary mt-2">Choose a PDF File</label>
+                    <span id="file-name" class="text-muted ms-2"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Get Answer</button>
+            </div>
         </form>
 
-        <footer>
-            <p>
-                You can find the source code for this project on GitHub:
-                <a 
-                    href="https://github.com/MK2706/RAG-for-Hydroge-Generation" 
-                    class="github-link" 
-                    target="_blank" 
-                    rel="noopener noreferrer">
-                    GitHub Repository
-                </a>
-            </p>
-        </footer>
+        <!-- Uploaded files section -->
+        {% if uploaded_files %}
+        <div class="uploaded-files mt-4">
+            <h3>Uploaded Files:</h3>
+            <ul class="list-group">
+                {% for file in uploaded_files %}
+                <li class="list-group-item">{{ file }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
     </div>
 
-    <!-- Include the external JavaScript file -->
-    <script src="{{ url_for('static', filename='script/qa.js') }}"></script> <!-- Update with the correct path -->
+    <script>
+        function updateFileName(input) {
+            const fileName = input.files[0]?.name || "No file chosen";
+            document.getElementById("file-name").textContent = fileName;
+        }
+    </script>
 </body>
 </html>
+
+{% endblock %}

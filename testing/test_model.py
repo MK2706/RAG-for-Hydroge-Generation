@@ -1,3 +1,6 @@
+import sys
+sys.path.append('/content/RAG-for-Hydroge-Generation')  # Adjust the path as needed
+
 import Model_Summary as mld
 import Model_QA as mldq
 

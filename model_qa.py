@@ -10,7 +10,8 @@ from pinecone import Pinecone
 import time
 import torch
 from sentence_transformers import SentenceTransformer
-from transformers import BartTokenizer, BartForConditionalGeneration
+from transformers import AutoTokenizer, AutoModel, AutoModelForSeq2SeqLM
+
 
 def generate_answer(query1):
     """Main function to process the query and generate an answer."""
@@ -121,6 +122,11 @@ index_2 = pc.Index(index_name_2)
 
 retriever = SentenceTransformer("flax-sentence-embeddings/all_datasets_v3_mpnet-base", device=device)
 
-tokenizer = BartTokenizer.from_pretrained('vblagoje/bart_lfqa')
-generator = BartForConditionalGeneration.from_pretrained('vblagoje/bart_lfqa').to(device)
+
+model_name = "1MK26/Final_FT_BART"
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+model = model.to(device)
 

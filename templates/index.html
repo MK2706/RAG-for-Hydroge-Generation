@@ -1,109 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | RAG Framework for Hydrogen Generation</title>
-    <style>
-        body {
-            background-color: #e9ecef; /* Light gray background */
-            color: #343a40; /* Dark text color */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #ffffff; /* White background for content */
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        h1 {
-            color: #007bff; /* Bootstrap primary color */
-            font-size: 2.5em;
-        }
-        .intro-text {
-            font-size: 1.2em;
-            margin: 0 20px;
-            color: #495057; /* Darker gray for text */
-        }
-        .get-started {
-            text-align: center;
-            margin-top: 20px;
-            background-color: #f8f9fa; /* Light background for this section */
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-        .button-container {
-            margin-top: 20px;
-        }
-        .btn-primary {
-            display: inline-block;
-            padding: 15px 30px;
-            margin: 10px;
-            background-color: #28a745; /* Green button */
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        .btn-primary:hover {
-            background-color: #218838; /* Darker green on hover */
-            transform: translateY(-2px);
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #6c757d; /* Muted text color */
-        }
-        .github-link {
-            color: #007bff; /* Bootstrap primary color */
-            text-decoration: none;
-        }
-        .github-link:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Welcome to the RAG Framework for Hydrogen Generation</h1>
-            <p class="intro-text">
-                This web application leverages advanced large language models to provide powerful tools for text summarization 
-                and question-answering, specifically designed for the field of hydrogen generation.
-            </p>
-        </header>
-
-        <section class="get-started">
-            <p>To get started, please click one of the options below:</p>
-            <div class="button-container">
-                <a href="/summarizer" class="btn-primary" aria-label="Go to Text Summarizer">Go to Text Summarizer</a>
-                <a href="/q_and_a_bot" class="btn-primary" aria-label="Go to QA Bot">Go to QA Bot</a>
-            </div>
-        </section>
-
-        <footer>
-            <p>
-                You can find the source code for this project on GitHub:
-                <a 
-                    href="https://github.com/MK2706/RAG-for-Hydroge-Generation" 
-                    class="github-link" 
-                    target="_blank" 
-                    rel="noopener noreferrer">
-                    GitHub Repository
-                </a>
-            </p>
-        </footer>
-    </div>
-</body>
+<html>
+  <head>
+    <title>Home</title>
+    <link rel="stylesheet" href="static\css\index.css">
+  </head>
+  <body>
+    <h1>Welcome to LLM for Hydrogen Storage</h1>
+    <p>
+      This web application leverages advanced large language models to provide powerful tools
+    </p>
+    <p>
+      for text summarization and question answering, specifically designed for the field of hydrogen storage.
+    </p>
+    <p>
+      To get started, please click the link below to visit the main page.
+    </p>
+    <a
+      href="{{ url_for('summarizer') }}"
+      class="github-link"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Go to Text Summarizer</a
+    >
+    <a
+      href="{{ url_for('qa') }}"
+      class="github-link"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Go to QA Bot</a
+    >
+    <p>
+      You can find the source code for this project on GitHub:
+      <a
+        href="https://github.com/Sharukesh3/LLM-for-hydrogen-storage"
+        class="github-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        >GitHub Repository</a
+      >
+    </p>
+  </body>
 </html>

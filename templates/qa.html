@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Q and A Bot</title>
     
-    <!-- Link to External CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/qa.css') }}">
+    <!-- Link to External CSS (use relative path instead of absolute) -->
+    <link rel="stylesheet" href="static/css/qa.css"> <!-- Adjust according to your structure -->
 
     <!-- Bootstrap CSS for quick layout styling -->
     <link 
@@ -34,10 +34,10 @@
             <!-- Input Section -->
             <div class="input-box d-flex align-items-center">
                 <!-- PDF Upload Form -->
-                <form id="upload-form" action="{{ url_for('qa') }}" method="post" enctype="multipart/form-data" class="me-2">
+                <form id="upload-form" action="/chat/{{ session_id }}" method="post" enctype="multipart/form-data" class="me-2">
                     <input 
                         type="file" 
-                        name="upload-doc" 
+                        name="upload_doc" 
                         id="upload-doc" 
                         accept=".pdf" 
                         onchange="uploadPDF()" 
@@ -73,6 +73,69 @@
     ></script>
 
     <!-- Link to External JS -->
-    <script src="{{ url_for('static', filename='script/qa.js') }}"></script>
+    <script src="static/script/qa.js"></script> <!-- Adjust according to your structure -->
+    
+    <script>
+        // Ensure you define these functions in your qa.js
+        function startNewChat() {
+            // Logic to start a new chat, e.g., clearing chat history
+            document.getElementById('chat-box').innerHTML = '';
+        }
+
+        function uploadPDF() {
+            const formData = new FormData(document.getElementById('upload-form'));
+            fetch('/chat/{{ session_id }}', {
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                return response.json();
+            }).then(data => {
+                // Handle the response from the server
+                if (data.response) {
+                    appendMessage(data.response, 'bot');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function sendMessage() {
+            const userMessage = document.getElementById('user-input').value;
+            appendMessage(userMessage, 'user');
+
+            fetch(`/chat/{{ session_id }}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({ message: userMessage })
+            }).then(response => {
+                return response.json();
+            }).then(data => {
+                if (data.response) {
+                    appendMessage(data.response, 'bot');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+
+            document.getElementById('user-input').value = ''; // Clear input after sending
+        }
+
+        function appendMessage(message, sender) {
+            const chatBox = document.getElementById('chat-box');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = sender === 'user' ? 'text-end' : 'text-start';
+            messageDiv.textContent = message;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the bottom
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+    </script>
 </body>
 </html>

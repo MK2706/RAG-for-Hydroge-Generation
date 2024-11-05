@@ -1,77 +1,34 @@
-{% extends 'base.html' %}
-{% block content %}
-
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 <head>
-    <title>Question Answering System</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/qa.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q and A Bot</title>
+    <link rel="stylesheet" href="static\css\qa.css">
 </head>
 <body>
-    <div class="container my-5">
-        <h1 class="text-center mb-4">Question Answering System</h1>
-        
-        <!-- Form for question input and file upload -->
-        <form method="post" enctype="multipart/form-data">
-            <div class="mb-4">
-                <label for="input_question" class="form-label">Enter your question:</label>
-                <textarea 
-                    id="input_question" 
-                    name="input_question" 
-                    class="form-control" 
-                    rows="3" 
-                    placeholder="Type your question here and press 'Get Answer.'"
-                >{{ request.form.get('input_question', '') }}</textarea>
+    <div class="container">
+        <div class="chat-container">
+            <div class="header">
+                <span>Bart Q and A Bot</span>
+                <button onclick="startNewChat()">New Chat</button>
             </div>
-
-            <div class="mb-4">
-                <label for="answer" class="form-label">Answer:</label>
-                <textarea 
-                    id="answer" 
-                    class="form-control" 
-                    rows="6" 
-                    placeholder="Answer will be displayed here..." 
-                    readonly
-                >{{ result or "" }}</textarea>
+            <div class="chat-box" id="chat-box"></div>
+            <div class="input-box">
+                <form id="upload-form" action="{{ url_for('qa') }}" method="post" enctype="multipart/form-data">
+                    <label for="upload-doc">📎</label>
+                    <input type="file" name="upload-doc" id="upload-doc" accept=".pdf" onchange="uploadPDF()">
+                </form>
+                <input type="text" id="user-input" placeholder="Type a message" onkeypress="handleKeyPress(event)">
+                <button onclick="sendMessage()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M4 12l1.41 1.41L10 8.83V20h2V8.83l4.59 4.58L20 12 12 4 4 12z"/>
+                    </svg>
+                </button>
             </div>
-
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div class="file-input">
-                    <input 
-                        type="file" 
-                        id="upload-doc" 
-                        name="upload-doc" 
-                        accept=".pdf" 
-                        class="form-control" 
-                        onchange="updateFileName(this)"
-                    />
-                    <label for="upload-doc" class="btn btn-secondary mt-2">Choose a PDF File</label>
-                    <span id="file-name" class="text-muted ms-2"></span>
-                </div>
-                <button type="submit" class="btn btn-primary">Get Answer</button>
-            </div>
-        </form>
-
-        <!-- Uploaded files section -->
-        {% if uploaded_files %}
-        <div class="uploaded-files mt-4">
-            <h3>Uploaded Files:</h3>
-            <ul class="list-group">
-                {% for file in uploaded_files %}
-                <li class="list-group-item">{{ file }}</li>
-                {% endfor %}
-            </ul>
         </div>
-        {% endif %}
     </div>
 
-    <script>
-        function updateFileName(input) {
-            const fileName = input.files[0]?.name || "No file chosen";
-            document.getElementById("file-name").textContent = fileName;
-        }
-    </script>
+    <script src="static\script\qa.js"></script>
 </body>
 </html>
-
-{% endblock %}

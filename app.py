@@ -1,5 +1,3 @@
-# app.py
-
 import streamlit as st
 import Model_Summary as mld
 import Model_QA as mldq
